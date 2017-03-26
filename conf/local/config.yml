@@ -1,0 +1,56 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 8080
+  adminConnectors:
+  - type: http
+    port: 8081
+
+serviceName: loadbalanser
+
+ddslConfig:
+  zookeeperHosts: localhost:2181
+  serviceId:
+    environment: test
+    name: loadbalanser
+    version: 1.0
+
+service1:
+    environment: test
+    name: machine-1
+    version: 1.0
+    
+service2:
+    environment: test
+    name: machine-2
+    version: 1.0
+    
+service3:
+    environment: test
+    name: machine-3
+    version: 1.0
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Redirects SQL logs to a separate file
+    org.hibernate.SQL:
+      level: DEBUG
+
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] %X{tid} [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: /tmp/application.log
+      archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MB
+
