@@ -20,3 +20,7 @@ urls:
     GET     /loadbalancer/serviceGr1 
     GET     /loadbalancer/serviceName/{serviceName}
 
+Basic Authantication:
+
+	Username: mustafa
+	Password: secret
